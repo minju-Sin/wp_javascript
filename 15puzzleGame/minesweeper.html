@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel ="stylesheet" type ="text/css" href = "./minesweeper.css">
+    <script src="./minesweeper.js"></script>
+    <title>Mine Sweeper</title>
+    <style>
+    </style>
+</head>
+<body>
+    <div class='board'>
+        <div class="control">
+            <span id='bomb' style="float:left;">099</span>
+            <button id=reset onclick="reset();"></button>
+            <span id='time' style="float:right;">000</span> 
+        </div>
+        <div class='field'>
+            <script>
+                const height= 16; //세로의 칸 수 
+                const width = 30; //가로의 칸 수 
+                const nBombs = 99; //폭탄의 개수 
+                const arraySize = height * width; //배열의크기 = 세로 * 가로 
+                const neighbor = [[-1,-1],[-1,0],[-1,1],[0,-1],[0,1],[1,-1],[1,0],[1,1]]; //주변 8개의 셀을 나타내는 좌표 
+
+                let isStarted = false; //게임시작
+                let isGameEnd = false; //게임끝 
+
+                let remainBombs = 99; //남아있는 폭탄의 개수
+                let curTime = 0; //시간 (999초가 되면 게임 종료)
+
+                let leftMB = false; 
+                let rightMB = false;
+                let bothMB = false; //마우스 클릭 할 때 필요 
+                let savedID = 16*30+1;
+                
+                
+                let cells = Array(arraySize); //open >> 0: empty , 1: bomb colsed >>2
+                cells.fill(0);
+                let checked = Array(arraySize); //closed >> 0: not, 1: checked bomb 
+                checked.fill(0);
+
+                for(let i=0; i<height; i++){
+                    for(let j=0; j<width; j++){
+                        id = i * width + j ; //2차원 배열을 1차원 배열로 변환 
+                    
+                        //이렇게 지뢰찾기의 테두리를 완성 
+                
+                        // document.write(`<div class =cellClosed id=${id} onclick="leftClick(this, '${id}');"><div>`);
+                        document.write("<div class = cellClosed id =" + id);
+                        document.write(" onmousedown ='mouseDown(event, this, " + id + ");'");
+                        document.write(" onmouseup='mouseUp(event, this, " + id + ");'");
+                        document.write(" oncontextmenu = 'doNothing(event);'");
+                        document.write("></div>");
+                    }
+                    document.write("<br/>");
+                }
+            </script>
+        </div>
+    </div>
+</body>
+</html>
