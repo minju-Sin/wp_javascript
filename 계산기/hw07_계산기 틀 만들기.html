@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>계산기 틀 만들기</title>
+    <style>
+      @media (max-width:540px){
+        div.empty{display:none;}
+        div.vertical{display:block;}
+        div.horizontal{display:none;}
+      }
+      @media (max-width:360px){
+        div.empty{display:block;}
+        div.vertical{display:none;}
+        div.horizontal{display:none;}
+      }
+      @media (min-width:541px){
+        div.empty{display:none;}
+        div.vertical{display:none;}
+        div.horizontal{display:block;}
+      }
+
+      #display {
+				font-weight: bold;
+				border : 1px solid black;
+				text-align: right;
+				padding-left: 230px;
+				background-color: white;
+				font-size: 20pt;
+			}
+
+      table {
+					border : 1px solid lightgray;
+					border-radius: 10px;
+          background-color: #F0F0F0;
+          padding: 60px;
+      }
+
+      button {
+          width:60px;
+					font-weight: bold;
+          height:60px;
+      }
+      button.func{
+          background-color: #DDDDDD;
+      }
+      button.operator{
+          background-color: #FFCC00;
+      }
+      button.number{
+          background-color: #F6F6F6;
+      }
+      button:hover {}
+    </style>
+</head>
+<body>
+	<div class="empty"><p>표시할수 없음.</p></div>
+   	<div class="vertical">
+    	<table width=360 height=660>
+        <colgroup>
+        	<col width=60><col width=60><col width=60><col width=60>
+        </colgroup>
+	      <tr>
+	      <td colspan=4 align=right><span id="display">30</span></td>
+	      </tr>
+      	<tr>
+        <td><button class='func'>mc</button></td>
+        <td><button class='func'>m+</button></td>
+        <td><button class='func'>m-</button></td>
+        <td><button class='func'>mr</button></td>
+        </tr>
+        <tr>
+        <td><button class='func'>CE</button></td>
+        <td><button class='func'>√x</button></td>
+        <td><button class='func'>%</button></td>
+        <td><button class='operator'>÷</button></td>
+        </tr>
+        <tr>
+        <td><button class='number'>7</button></td>
+        <td><button class='number'>8</button></td>
+        <td><button class='number'>9</button></td>
+        <td><button class='operator'>×</button></td>
+        </tr>
+        <tr>
+        <td><button class='number'>4</button></td>
+        <td><button class='number'>5</button></td>
+        <td><button class='number'>6</button></td>
+        <td><button class='operator'>-</button></td>
+        </tr>
+        <tr>
+        <td><button class='number'>1</button></td>
+        <td><button class='number'>2</button></td>
+        <td><button class='number'>3</button></td>
+        <td><button class='operator'>+</button></td>
+        </tr>
+        <tr>
+        <td><button class='number'>0</button></td>
+        <td><button class='number'>.</button></td>
+        <td><button class='number'>+/-</button></td>
+        <td><button class='operator'>=</button></td>
+        </tr>
+       	<tr>
+        <td><button class='func'>∏</button></td>
+        <td><button class='func'>x²</button></td>
+        <td><button class='func'>R2</button></td>
+        <td><button class='func'>R0</button></td>
+        </tr>
+        <tr><td colspan=4 align=right>20213067신민주</td></tr>
+   		</table>
+   </div>
+   <div class="horizontal">
+   	<table width=540 height=480>
+    	<colgroup>
+				<col width=60><col width=60><col width=60><col width=60>
+      </colgroup>
+      	<tr>
+        <td colspan=7 align=right><span id="display" style="padding-left: 430px;">30</span></td>
+        </tr>
+      	<tr>
+        <td><button class='func'>mc</button></td>
+        <td><button class='func'>m+</button></td>
+        <td><button class='number'>7</button></td>
+        <td><button class='number'>8</button></td>
+				<td><button class='number'>9</button></td>
+			 	<td><button class='operator'>+</button></td>
+				<td><button class='func'>R2</button></td>
+        </tr>
+        <tr>
+        <td><button class='func'>m-</button></td>
+				<td><button class='func'>mr</button></td>
+				<td><button class='number'>4</button></td>
+        <td><button class='number'>5</button></td>
+        <td><button class='number'>6</button></td>
+				<td><button class='operator'>×</button></td>
+				<td><button class='func'>R0</button></td>
+			</tr>
+			<tr>
+				<td><button class='func'>∏</button></td>
+				<td><button class='func'>x²</button></td>
+				<td><button class='number'>1</button></td>
+        <td><button class='number'>2</button></td>
+        <td><button class='number'>3</button></td>
+				<td><button class='operator'>-</button></td>
+				<td><button class='func'>CE</button></td>
+			</tr>
+			<tr>
+			<td><button class='func'>√x</button></td>
+			<td><button class='func'>%</button></td>
+			<td><button class='number'>0</button></td>
+			<td><button class='number'>.</button></td>
+			<td><button class='number'>+/-</button></td>
+			<td><button class='operator'>+</button></td>
+			<td><button class='operator'>=</button></td>
+			</tr>
+			<tr><td colspan=7 align=right>20213067신민주</td></tr>
+		</table>
+	</div>
+</body>
+</html>

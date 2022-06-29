@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>계산기 완성하기</title>
+    <style>
+      @media (max-width:540px){
+        div.empty{display:none;}
+        div.vertical{display:block;}
+        div.horizontal{display:none;}
+      }
+      @media (max-width:360px){
+        div.empty{display:block;}
+        div.vertical{display:none;}
+        div.horizontal{display:none;}
+      }
+      @media (min-width:541px){
+        div.empty{display:none;}
+        div.vertical{display:none;}
+        div.horizontal{display:block;}
+      }
+
+      #display1, #display2 {
+    font-weight: bold;
+    border : 1px solid black;
+    text-align: right;
+    padding-left: 230px;
+    background-color: white;
+    font-size: 20pt;
+   }
+
+
+      table {
+     border : 1px solid lightgray;
+     border-radius: 10px;
+          background-color: #F0F0F0;
+          padding: 60px;
+      }
+
+      button {
+          width:60px;
+     font-weight: bold;
+          height:60px;
+      }
+      button.func{
+          background-color: #DDDDDD;
+      }
+      button.operator{
+          background-color: #FFCC00;
+      }
+      button.number{
+          background-color: #F6F6F6;
+      }
+      button:hover {}
+    </style>
+
+  <script>
+  let curValue = 0;
+  let operator='';
+  var memory=0;
+  let func='';
+
+  function numberButton(number){
+   var display1 = document.getElementById("display1");
+   if(document.getElementById("display1").innerHTML=='0'){
+    document.getElementById('display1').innerHTML = number;
+   } else{
+    document.getElementById('display1').innerHTML += number;
+   }
+  }
+
+  // OPTIMIZE: 숫자 버튼 구현
+  function plusButton(){
+   curValue = parseFloat(document.getElementById("display1").innerHTML);
+   document.getElementById("display1").innerHTML = 0;
+   operator = '+';
+  }
+  // OPTIMIZE: 더하기 연산자 버튼 구현
+  function minusButton(){
+   curValue = parseFloat(document.getElementById("display1").innerHTML);
+   document.getElementById("display1").innerHTML = 0;
+   operator = '-';
+  }
+  // OPTIMIZE: 빼기 연산자 버튼 구현
+  function timesButton(){
+   curValue = parseFloat(document.getElementById("display1").innerHTML);
+   document.getElementById("display1").innerHTML = 0;
+   operator = '×';
+  }
+  // OPTIMIZE: 곱셈 연산자 버튼 구현
+  function divButton(){
+   curValue = parseFloat(document.getElementById("display1").innerHTML);
+   document.getElementById("display1").innerHTML = 0;
+   operator = '÷';
+  }
+  // OPTIMIZE: 나누기 연산자 버튼 구현
+  function reset(){
+   curValue = parseFloat(document.getElementById("display1").innerHTML);
+   document.getElementById("display1").innerHTML = 0;
+  }
+  // OPTIMIZE: 리셋 연산자 버튼 구현
+  function MC(){
+   memory = document.getElementById("display1").innerHTML = 0;
+            document.getElementById("display1").innerHTML = 0;
+   func='mc';
+  }
+  // OPTIMIZE: mc 연산자 버튼 구현
+  function MR(){
+   document.getElementById("display1").innerHTML = memory;
+   func='mr';
+  }
+  // OPTIMIZE: mr 연산자 버튼 구현
+  function MemoryPlus(){
+   memory += parseFloat(document.getElementById("display1").innerHTML);
+   func='m+';
+
+  }
+  // OPTIMIZE: m+ 연산자 버튼 구현
+  function MemoryMinus(){
+   memory -= parseFloat(document.getElementById("display1").innerHTML);
+   func='m-';
+  }
+  // OPTIMIZE: m- 연산자 버튼 구현
+  function nanugi(){
+   curValue = parseFloat(document.getElementById("display1").innerHTML);
+   document.getElementById("display1").innerHTML = 0;
+   func = '%';
+  }
+  // OPTIMIZE: 나머지 연산자 버튼 구현
+  function Sqrt(){
+   func='√x';
+   curValue = parseFloat(document.getElementById("display1").innerHTML);
+   curValue = Math.sqrt(curValue);
+   document.getElementById("display1").innerHTML = curValue;
+  }
+  // OPTIMIZE: 루트 연산자 버튼 구현
+  function Pow(){
+   func='x²';
+   curValue = parseFloat(document.getElementById("display1").innerHTML);
+   curValue = Math.pow(curValue,2);
+   document.getElementById("display1").innerHTML = curValue;
+  }
+  // OPTIMIZE: 제곱 연산자 버튼 구현
+  function Abs(){
+   number='+/-';
+   curValue = parseFloat(document.getElementById("display1").innerHTML);
+   curValue = eval(curValue)* -1;
+   document.getElementById("display1").innerHTML = curValue;
+  }
+  // OPTIMIZE: +/- 연산자 버튼 구현
+
+  function PIE(){
+   func='∏';
+   document.getElementById("display1").innerHTML = 3.1415926536;
+  }
+  // OPTIMIZE: PIE 연산자 버튼 구현
+
+  function R2(){
+   document.getElementById("display1").innerHTML = curValue.toFixed(2);
+  }
+  // OPTIMIZE: R2 연산자 버튼 구현
+  function R0(){
+   document.getElementById("display1").innerHTML = curValue.toFixed(0);
+  }
+  // OPTIMIZE: R0 연산자 버튼 구현
+
+  function equalButton(){
+   if(operator=='+'){
+    curValue += parseFloat(document.getElementById('display1').innerHTML);
+    document.getElementById("display1").innerHTML = curValue;
+   }else if(operator=='-'){
+    curValue -= parseFloat(document.getElementById('display1').innerHTML);
+    document.getElementById("display1").innerHTML = curValue;
+   }else if(operator=='÷'){
+    curValue /= parseFloat(document.getElementById('display1').innerHTML);
+    document.getElementById("display1").innerHTML = curValue;
+   }else if(func=='%'){
+    curValue %= parseFloat(document.getElementById('display1').innerHTML);
+    document.getElementById("display1").innerHTML = curValue;
+   }else{
+    curValue *= parseFloat(document.getElementById('display1').innerHTML);
+    document.getElementById("display1").innerHTML = curValue;
+   }
+  }
+  // OPTIMIZE: 계산 버튼 구현
+ </script>
+</head>
+<body>
+ <div class="empty"><p>표시할수 없음.</p></div>
+    <div class="vertical">
+     <table width=360 height=660>
+        <colgroup>
+         <col width=60><col width=60><col width=60><col width=60>
+        </colgroup>
+       <tr>
+       <td colspan=4 align=right><span id="display1">0</span></td>
+       </tr>
+       <tr>
+        <td><button class='func' onclick='MC();'>mc</button></td>
+        <td><button class='func' onclick='MemoryPlus();'>m+</button></td>
+        <td><button class='func' onclick='MemoryMinus();'>m-</button></td>
+        <td><button class='func' onclick='MR();'>mr</button></td>
+        </tr>
+        <tr>
+        <td><button class='func' onclick='reset();'>CE</button></td>
+        <td><button class='func' onclick='Sqrt();'>√x</button></td>
+        <td><button class='func' onclick='nanugi();'>%</button></td>
+        <td><button class='operator' onclick='divButton();'>÷</button></td>
+        </tr>
+        <tr>
+        <td><button class='number' onclick='numberButton(7);'>7</button></td>
+        <td><button class='number' onclick='numberButton(8);'>8</button></td>
+        <td><button class='number' onclick='numberButton(9);'>9</button></td>
+        <td><button class='operator' onclick='timesButton();'>×</button></td>
+        </tr>
+        <tr>
+        <td><button class='number' onclick='numberButton(4);'>4</button></td>
+        <td><button class='number' onclick='numberButton(5);'>5</button></td>
+        <td><button class='number' onclick='numberButton(6);'>6</button></td>
+        <td><button class='operator' onclick='minusButton()'>-</button></td>
+        </tr>
+        <tr>
+        <td><button class='number' onclick='numberButton(1);'>1</button></td>
+        <td><button class='number' onclick='numberButton(2);'>2</button></td>
+        <td><button class='number' onclick='numberButton(3);'>3</button></td>
+        <td><button class='operator' onclick="plusButton()">+</button></td>
+        </tr>
+        <tr>
+        <td><button class='number' onclick='numberButton(0);'>0</button></td>
+        <td><button class='number' onclick="numberButton('.');">.</button></td>
+        <td><button class='number' onclick="Abs();">+/-</button></td>
+        <td><button class='operator' onclick='equalButton();'>=</button></td>
+        </tr>
+        <tr>
+        <td><button class='func' onclick='PIE();'>∏</button></td>
+        <td><button class='func' onclick='Pow();'>x²</button></td>
+        <td><button class='func' onclick='R2();'>R2</button></td>
+        <td><button class='func' onclick='R0();'>R0</button></td>
+        </tr>
+        <tr><td colspan=4 align=right>20213067신민주</td></tr>
+     </table>
+   </div>
+
+   <div class="horizontal">
+    <table width=540 height=480>
+     <colgroup>
+    <col width=60><col width=60><col width=60><col width=60>
+      </colgroup>
+       <tr>
+        <td colspan=7 align=right><span id="display2" style="padding-left: 430px;">0</span></td>
+        </tr>
+       <tr>
+        <td><button class='func'>mc</button></td>
+        <td><button class='func'>m+</button></td>
+        <td><button class='number'>7</button></td>
+        <td><button class='number'>8</button></td>
+    <td><button class='number'>9</button></td>
+     <td><button class='operator'>+</button></td>
+    <td><button class='func'>R2</button></td>
+        </tr>
+        <tr>
+        <td><button class='func'>m-</button></td>
+    <td><button class='func'>mr</button></td>
+    <td><button class='number'>4</button></td>
+        <td><button class='number'>5</button></td>
+        <td><button class='number'>6</button></td>
+    <td><button class='operator'>×</button></td>
+    <td><button class='func'>R0</button></td>
+   </tr>
+   <tr>
+    <td><button class='func'>∏</button></td>
+    <td><button class='func'>x²</button></td>
+    <td><button class='number'>1</button></td>
+        <td><button class='number'>2</button></td>
+        <td><button class='number'>3</button></td>
+    <td><button class='operator'>-</button></td>
+    <td><button class='func'>CE</button></td>
+   </tr>
+   <tr>
+   <td><button class='func'>√x</button></td>
+   <td><button class='func'>%</button></td>
+   <td><button class='number'>0</button></td>
+   <td><button class='number'>.</button></td>
+   <td><button class='number'>+/-</button></td>
+   <td><button class='operator'>+</button></td>
+   <td><button class='operator'>=</button></td>
+   </tr>
+   <tr><td colspan=7 align=right>20213067신민주</td></tr>
+  </table>
+ </div>
+</body>
+</html>
+ 
